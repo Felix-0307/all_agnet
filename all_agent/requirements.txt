@@ -1,0 +1,10 @@
+langchain
+langchain_openai
+langgraph-cli
+dotenv
+deepagents
+minio
+markitdown[all]
+pypandoc
+mcp
+langchain-mcp-adapters

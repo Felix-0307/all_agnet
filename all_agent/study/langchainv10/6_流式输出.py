@@ -23,7 +23,7 @@ result = agent.stream({
 for chunk in result:
     print(chunk)
 
-print('_'*100)
+# print('_'*100)
 
 
 #

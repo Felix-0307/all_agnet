@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from langchain.agents import create_agent
 from conn.llm import get_llm
+from langchain.messages import AIMessageChunk
 
 
 class ContactInfo(BaseModel):
@@ -18,15 +19,18 @@ agent = create_agent(
 
 result = agent.stream({
     "messages": [{"role": "user", "content": "从如下文本中提取信息: John Doe, john@example.com, (555) 123-4567"}]
-},stream_mode='message')
+}, stream_mode=['messages','updates'])
 
 for chunk in result:
-    token = chunk[0].content
-    if token.strip() != "":
-        print(token)
+    print(chunk)
+    if chunk[0] == 'messages':
+        if type(chunk[1][0]) == AIMessageChunk:
+            print(chunk[1][0].content,end='\n')
+    else:
+        print(chunk)
 
 
-print('_'*100)
+# print('_'*100)
 
 
 #
